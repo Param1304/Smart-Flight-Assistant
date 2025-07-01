@@ -16,9 +16,9 @@
 ## **🚀 Future Enhancements**  
 
 ## **📌 Contributors** 
-👤 **Param Parekh** - Web Development  
+👤 **Param Parekh**   
 📧 Email: parammparekh13@gmail.com
-👤 **Mihir Gore** - Artificial Intelligence  
+👤 **Mihir Gore** 
 📧 Email: 
 
 
