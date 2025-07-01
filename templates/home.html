@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Flight Assistant</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                {% comment %} <button class="get-started">Get Started</button> {% endcomment %}
+            </nav>
+        </div>
+    </header>
+
+	<section class="main-content" style="background-image: url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+		<div class="content">
+			<h1>Smart Flight Assistant</h1>
+			<p>Delay Predictor, Compare Airlines & CO₂ Footprint</p>
+			{% comment %} <span class="accent-dot"></span> {% endcomment %}
+		</div>
+	</section>
+
+    <section class="services">
+        <div class="container">
+            <div class="card">
+                <a href="{% url 'delay_predictor' %}" class="icon"><i class="fas fa-clock"></i> Delay Predictor</a>
+                
+            </div>
+            <div class="card">
+                <a href="{% url 'compare_airlines' %}" class="icon"><i class="fas fa-plane"></i> Compare Airlines</a>
+                
+            </div>
+            <div class="card">
+                <a href="{% url 'co2_footprint' %}" class="icon"><i class="fas fa-leaf"></i> CO2 Footprint</a>
+                
+            </div>
+            <div class="card">
+                <a href="{% url 'delay_analysis' %}" class="icon"><i class="fas fa-chart-bar"></i> Dashboard</a>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([36.28, -106.81], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Function to start tracking
+        async function startTracking() {
+            const lat = document.getElementById('lat').value;
+            const lon = document.getElementById('lon').value;
+            const range = document.getElementById('range').value;
+
+            // Clear existing markers
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) map.removeLayer(layer);
+            });
+            // Fetch data from AviationStack API
+            const apiKey = 'YOUR_AVIATIONSTACK_API_KEY'; // Replace with your API key
+            const url = `https://api.aviationstack.com/v1/flights?access_key=${apiKey}&limit=100`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // Filter flights within the specified range
+            data.data.forEach(flight => {
+                if (flight.live) {
+                    const flightLat = flight.live.latitude;
+                    const flightLon = flight.live.longitude;
+                    const distance = getDistanceFromLatLonInKm(lat, lon, flightLat, flightLon);
+                    if (distance <= range) {
+                        const marker = L.marker([flightLat, flightLon]).addTo(map)
+                            .bindPopup(`Flight: ${flight.flight.iata}<br>Airline: ${flight.airline.name}<br>Status: ${flight.flight_status}`);
+                    }
+                }
+            });
+
+            // Update map view to center on the input coordinates
+            map.setView([lat, lon], 5);
+        }
+
+        // Haversine formula to calculate distance between two points
+        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the Earth in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        // Auto-refresh every 60 seconds
+        setInterval(startTracking, 60000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+/* Import Google Fonts (if not already in your CSS) */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo .accent {
+    color: #f39c12;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.main-content {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 700px; /* Increased height to accommodate larger map */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.main-content .content {
+    position: relative;
+    z-index: 1;
+}
+
+.tracking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px; /* Increased width to match larger map */
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3); /* Slight background for form readability */
+    border-radius: 10px;
+}
+
+.input-field {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.predict-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.predict-button:hover {
+    background-color: #e67e22;
+}
+
+.map-container {
+    height: 500px; /* Increased height for a larger map */
+    width: 100%; /* Full width of the tracking-form */
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #f39c12; /* Optional: Add a border for visual clarity */
+}
+
+.services {
+    padding: 50px 0;
+    background-color: #444;
+}
+
+.services .container {
+    display: flex;
+    justify-content: center;
+}
+
+.services-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+}
+
+.services-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 45%;
+}
+
+.services .card {
+    padding: 20px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.services .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.services .card .icon {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.services .card .icon:hover {
+    background-color: #e67e22;
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .services-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .services-column {
+        width: 100%;
+        align-items: center;
+    }
+
+    .services .card {
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        min-height: 600px;
+    }
+
+    .tracking-form {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .map-container {
+        height: 300px; /* Smaller height for mobile */
+    }
+}

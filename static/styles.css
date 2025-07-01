@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+/* CSS Reset to remove all default margins and padding */
+* {    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure html takes full viewport */
+html {
+    height: 100%;
+    width: 100%;
+}
+
+/* Ensure body takes full viewport and has a background color */
+body {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    width: 100%;
+    min-height: 100vh; /* Ensures body is at least full viewport height */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    background-color: #333; /* Match header color to cover any gaps */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the container takes full width */
+.container {
+    max-width: 100%; /* Full width */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Add some padding for better spacing */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px 0;
+    width: 100%;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo .accent {
+    color: #f39c12;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+nav .get-started {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-content {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh; /* Reduced from 100vh to leave space for services */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    flex-grow: 1; /* Allow it to grow but not exceed available space */
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 0;
+}
+
+.main-content .content {
+    position: relative;
+    z-index: 1;
+}
+
+.main-content .content h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.main-content .content p {
+    font-size: 25px;
+    color: #ccc;
+}
+
+.main-content .accent-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #f39c12;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.services {
+    padding: 20px 0;
+    background-color: #444;
+    width: 100%;
+    flex-shrink: 0; /* Prevent shrinking to ensure it stays visible */
+}
+
+.services .container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+}
+
+.services .card {
+    width: 200px;
+    padding: 20px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 10px; /* Add margin for spacing */
+}
+
+.services .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.services .card .icon {
+    font-size: 26px;
+    color: #f39c12;
+    margin-bottom: 10px;
+    text-decoration: none; /* Ensure links look clean */
+    display: block;
+}
+
+.services .card p {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .services .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .services .card {
+        margin-bottom: 20px;
+    }
+
+    .main-content {
+        min-height: 60vh; /* Further reduce height on smaller screens */
+    }
+
+    .main-content .content h1 {
+        font-size: 36px;
+    }
+
+    .main-content .content p {
+        font-size: 24px;
+    }
+}

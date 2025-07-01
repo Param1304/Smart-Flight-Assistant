@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delay Predictor - ATC</title>
+    <link rel="stylesheet" href="{% static 'delay_predictor.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#{% url 'statistics' %}">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="main-content" style="background-image: url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+        <div class="content">
+            <div class="prediction-form">
+                <form method="POST" id="delayForm">
+                    {% csrf_token %}
+                    <label>Airline code (e.g., AA)</label>
+                    <input type="text" name="airline" placeholder="Airline code (e.g., AA)" class="input-field" required>
+                    <label>Origin airport code (e.g., ATL)</label>
+                    <input type="text" name="origin" placeholder="Origin airport code (e.g., ATL)" class="input-field" required>
+                    <label>Destination airport code (e.g., LAX)</label>
+                    <input type="text" name="dest" placeholder="Destination airport code (e.g., LAX)" class="input-field" required>
+                    <label>Day of Week (1-7)</label>
+                    <input type="number" name="day_of_week" placeholder="Day of Week (1-7)" class="input-field" min="1" max="7" required>
+                    <label>Month (1-12)</label>
+                    <input type="number" name="month" placeholder="Month (1-12)" class="input-field" min="1" max="12" required>
+                    <label>Hour (0-23)</label>
+                    <input type="number" name="hour" placeholder="Hour (0-23)" class="input-field" min="0" max="23" required>
+                    <label>Is Weekend? (1=Yes, 0=No)</label>
+                    <input type="number" name="is_weekend" placeholder="Is Weekend? (1=Yes, 0=No)" class="input-field" min="0" max="1" required>
+                    <label>Day of Month (1-31)</label>
+                    <input type="number" name="day_of_month" placeholder="Day of Month (1-31)" class="input-field" min="1" max="31" required>
+                    <button type="submit" class="predict-button">Predict</button>
+                </form>
+                <div id="delay-output" class="output-field">Expected Delay: N/A minutes</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <div class="card">
+                <a href="{% url 'delay_predictor' %}" class="icon">Delay Predictor</a>
+                <p></p>
+            </div>
+            <div class="card">
+                <a href="{% url 'compare_airlines' %}" class="icon">Compare Airlines</a>
+                <p></p>
+            </div>
+            <div class="card">
+                <a href="{% url 'co2_footprint' %}" class="icon">CO2 Footprint</a>
+                <p></p>
+            </div>
+            <div class="card">
+                <a href="{% url 'delay_analysis' %}" class="icon">Delay Analysis</a>
+                <p></p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('delayForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const output = document.getElementById('delay-output');
+                output.textContent = `Expected Delay: ${data.predicted_delay.toFixed(2)} minutes`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('delay-output').textContent = 'Error predicting delay';
+            });
+        });
+    </script>
+

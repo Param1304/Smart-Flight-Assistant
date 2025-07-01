@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Airlines - ATC</title>
+    <link rel="stylesheet" href="{% static 'compare_airlines.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {% comment %} <script src="https://cdn.plotly.com/plotly-2.16.1.min.js"></script> {% endcomment %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.1/plotly.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="main-content" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+        <div class="content">
+            <div class="compare-form-card">
+                <h2 class="form-title">Compare Airlines</h2>
+                <form method="POST" id="compareForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="airline1">Airline 1:</label>
+                        <select name="airline1" id="airline1" class="input-field" required>
+                            <option value="" disabled selected>Select Airline 1</option>
+                            {% for airline in airlines %}
+                                <option value="{{ airline }}">{{ airline }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="airline2">Airline 2:</label>
+                        <select name="airline2" id="airline2" class="input-field" required>
+                            <option value="" disabled selected>Select Airline 2</option>
+                            {% for airline in airlines %}
+                                <option value="{{ airline }}">{{ airline }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="predict-button">
+                        <span class="button-text">Compare</span>
+                        <span class="spinner hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                    </button>
+                </form>
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
+                {% if graphs %}
+                    <div class="graph-container">
+                        {% if graphs.delay_plot %}
+                            <div class="plotly-graph">{{ graphs.delay_plot|safe }}</div>
+                        {% else %}
+                            <div class="result-card placeholder">No delay data available</div>
+                        {% endif %}
+                        {% if graphs.cancellation_plot %}
+                            <div class="plotly-graph">{{ graphs.cancellation_plot|safe }}</div>
+                        {% else %}
+                            <div class="result-card placeholder">No cancellation data available</div>
+                        {% endif %}
+                        {% if graphs.wait_time_plot %}
+                            <div class="plotly-graph">{{ graphs.wait_time_plot|safe }}</div>
+                        {% else %}
+                            <div class="result-card placeholder">No wait time data available</div>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div class="result-card placeholder">
+                        <p>No data available for comparison</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('compareForm').addEventListener('submit', function(event) {
+            const button = this.querySelector('.predict-button');
+            const spinner = button.querySelector('.spinner');
+            const buttonText = button.querySelector('.button-text');
+
+            button.disabled = true;
+            spinner.classList.remove('hidden');
+            buttonText.style.opacity = '0';
+        });
+    </script>
+</body>
+</html>

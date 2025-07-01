@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django App Template</title>
+    <link rel="stylesheet" href="{% static 'live_tracking.css' %}">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="main-content" style="background-image: url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+        <div class="content">
+            <div class="tracking-form">
+                <input type="number" id="lat" placeholder="Latitude" step="0.01" class="input-field" value="20">
+                <input type="number" id="lon" placeholder="Longitude" step="0.01" class="input-field" value="72">
+                <input type="number" id="range" placeholder="Range (km)" step="10" class="input-field" value="500">
+                <button onclick="startTracking()" class="predict-button">Start Tracking</button>
+                <div id="map" class="map-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            {% comment %} <div class="services-wrapper">
+                <div class="services-column">
+                    <div class="card">
+                        <a href="{% url 'delay_predictor' %}" class="icon">Delay Predictor</a>
+                        <p></p>
+                    </div>
+                    <div class="card">
+                        <a href="{% url 'live_tracking' %}" class="icon">Live Tracking</a>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="services-column">
+                    <div class="card">
+                        <a href="{% url 'co2_footprint' %}" class="icon">CO2 Footprint</a>
+                        <p></p>
+                    </div>
+                    <div class="card">
+                        <a href="{% url 'best_performers' %}" class="icon">Best Performers</a>
+                        <p></p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </section>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([20, 72], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Function to start tracking
+        async function startTracking() {
+            const lat = document.getElementById('lat').value;
+            const lon = document.getElementById('lon').value;
+            const range = document.getElementById('range').value;
+
+            // Clear existing markers
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) map.removeLayer(layer);
+            });
+
+            // Fetch data from AviationStack API
+            const apiKey = 'cbd04b2f0534995dafc014f8bbcffc85';
+            const url = `https://api.aviationstack.com/v1/flights?access_key=${apiKey}&limit=100`;
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // Filter flights within the specified range
+            data.data.forEach(flight => {
+                if (flight.live) {
+                    const flightLat = flight.live.latitude;
+                    const flightLon = flight.live.longitude;
+                    const distance = getDistanceFromLatLonInKm(lat, lon, flightLat, flightLon);
+                    if (distance <= range) {
+                        const marker = L.marker([flightLat, flightLon]).addTo(map)
+                            .bindPopup(`Flight: ${flight.flight.iata}<br>Airline: ${flight.airline.name}<br>Status: ${flight.flight_status}`);
+                    }
+                }
+            });
+
+            // Update map view to center on the input coordinates
+            map.setView([lat, lon], 5);
+        }
+
+        // Haversine formula to calculate distance between two points
+        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
+
+        // Auto-refresh every 60 seconds
+        setInterval(startTracking, 60000);
+    </script>
+</body>
+</html>
+

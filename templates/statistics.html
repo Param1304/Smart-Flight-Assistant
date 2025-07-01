@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="{% static 'statistics.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                {% comment %} <button class="get-started">Get Started</button> {% endcomment %}
+            </nav>
+        </div>
+    </header>
+
+    <section class="main-content" style="background-image: url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+        <div class="content">
+            <div class="grid-container">
+                <!-- Row 1 -->
+                <div class="grid-item">
+                    <img src="{% static 'images/TopTenRouteswithHighestAvgDelays.jpg' %}" alt="Image 1" class="grid-image">
+                    <p class="grid-description">Top Ten Routes with Highest Average Delays</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/TotalDelayBreakdownbyCause.jpg' %}" alt="Image 2" class="grid-image">
+                    <p class="grid-description">Total Delay Breakdown by Cause</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/TotalDelayforCancelledandNonCancelledFlights.jpg' %}" alt="Image 3" class="grid-image">
+                    <p class="grid-description">Total Delay for Cancelled and Non-Cancelled Flights</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/CorrelationHeatMap.jpg' %}" alt="Image 4" class="grid-image">
+                    <p class="grid-description">CorrelationHeatMap</p>
+                </div>
+                <!-- Row 2 -->
+                <div class="grid-item">
+                    <img src="{% static 'images/InteractiveCorrelationHeatMap.jpg' %}" alt="Image 5" class="grid-image">
+                    <p class="grid-description">Interactive Correlation HeatMap</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/AvgTotalDelayperDay.jpg' %}" alt="Image 6" class="grid-image">
+                    <p class="grid-description">Average Total Delays per Day</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/DistributionofArrivalDelays.jpg' %}" alt="Image 7" class="grid-image">
+                    <p class="grid-description">Distribution of Arrival Delays</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/DistributionofDepartureDelays.jpg' %}" alt="Image 8" class="grid-image">
+                    <p class="grid-description">Distribution of Departure Delays</p>
+                </div>
+                <!-- Row 3 -->
+                <div class="grid-item">
+                    <img src="{% static 'images/AvgDelaybyDayoftheWeek.jpg' %}" alt="Image 9" class="grid-image">
+                    <p class="grid-description">Average Delay by Day of the Week</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/AvgDelaybyHouroftheDay.jpg' %}" alt="Image 10" class="grid-image">
+                    <p class="grid-description">Avg Delay by Hour of the Day</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/BoxplotofArrivalDelays.jpg' %}" alt="Image 11" class="grid-image">
+                    <p class="grid-description">Boxplot of Arrival Delays</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images/BoxplotofDepartureDelays.jpg' %}" alt="Image 12" class="grid-image">
+                    <p class="grid-description">Boxplot of Departure Delays</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+			{% comment %} <div class="card">
+				<a href="{% url 'delay_predictor' %}" class="icon">Delay Predictor</a>
+				<p></p>
+			</div>
+            <div class="card">
+				<a href="{% url 'live_tracking' %}" class="icon">Live Tracking</a>
+                <p></p>
+            </div>
+            <div class="card">
+				<a href="{% url 'co2_footprint' %}" class="icon">CO2 Footprint</a>
+                <p></p>
+            </div>
+            <div class="card">
+				<a href="{% url 'best_performers' %}" class="icon">Best Performers</a>
+                <p></p>
+            </div> {% endcomment %}
+        </div>
+    </section>
+</body>
+</html>

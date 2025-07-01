@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'delay_analysis.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo"><span class="accent">AT</span>C</div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'statistics' %}">Statistics</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+	<section class="main-content" style="background-image: url('{% static 'images/aircraft_wallpaper2.jpg' %}');">
+		<div class="content">
+			<div class="grid-container">
+                <!-- Row 1 -->
+                <div class="grid-item">
+                    <img src="{% static 'images2/uniqueroutes.png' %}" alt="Image 1" class="grid-image">
+                    <p class="grid-description">Unique routes per airline</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/totalflights.png' %}" alt="Image 2" class="grid-image">
+                    <p class="grid-description">Total flights per airline</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/flightfrequency.png' %}" alt="Image 3" class="grid-image">
+                    <p class="grid-description">Flight Frequency: Day of Week vs Month</p>
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="grid-item">
+                    <img src="{% static 'images2/diversionrate.png' %}" alt="Image 5" class="grid-image">
+                    <p class="grid-description">Diversion rate per airline</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/correlationheatmap.png' %}" alt="Image 6" class="grid-image">
+                    <p class="grid-description">Correlation Heatmap of Flight Delay Features</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/cancelrate.png' %}" alt="Image 7" class="grid-image">
+                    <p class="grid-description">Cancellation rate per airline</p>
+                </div>
+                <!-- Row 3 -->
+                <div class="grid-item">
+                    <img src="{% static 'images2/avgtaxitime.png' %}" alt="Image 9" class="grid-image">
+                    <p class="grid-description">Average Taxi Times per airline</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/avgflightdistance.png' %}" alt="Image 10" class="grid-image">
+                    <p class="grid-description">Average flight distance per airline</p>
+                </div>
+                <div class="grid-item">
+                    <img src="{% static 'images2/avgarrdelay.png' %}" alt="Image 11" class="grid-image">
+                    <p class="grid-description">Average arrival delay by airline</p>
+                </div>                
+            </div>
+		</div>
+	</section>
+
+    <section class="services">
+        <div class="container">
+			{% comment %} <div class="card">
+				<a href="{% url 'delay_predictor' %}" class="icon">Delay Predictor</a>
+				<p></p>
+			</div>
+            <div class="card">
+				<a href="{% url 'live_tracking' %}" class="icon">Live Tracking</a>
+                <p></p>
+            </div>
+            <div class="card">
+				<a href="{% url 'co2_footprint' %}" class="icon">CO2 Footprint</a>
+                <p></p>
+            </div>
+            <div class="card">
+				<a href="{% url 'best_performers' %}" class="icon">Best Performers</a>
+                <p></p>
+            </div> {% endcomment %}
+        </div>
+    </section>
+</body>
+</html>
