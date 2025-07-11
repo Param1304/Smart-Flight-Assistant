@@ -85,6 +85,35 @@ webapp/
 
 
 ## **🚀 Installation & Setup**
+### **1️⃣ Clone the Repository**  
+```sh
+git clone https://github.com/your-username/task_optimizer.git
+cd task_optimizer
+```
+
+### **2️⃣ Create a Virtual Environment**  
+```sh
+python -m venv venv
+source venv/bin/activate  # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+
+### **3️⃣ Install Dependencies**  
+```sh
+pip install -r requirements.txt
+```
+
+### **4️⃣ Run Migrations & Start Server**  
+```sh
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+### **5️⃣ Access the Web App**  
+Open **http://127.0.0.1:8000/** in your browser.
+
+---
 
 ## **🖥️ Usage**
 
