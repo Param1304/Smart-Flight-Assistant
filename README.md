@@ -16,6 +16,73 @@ This is an end-to-end ML-powered web application to predict flight delays based 
  
 
 ## **📂 Project Structure** 
+```
+webapp/
+├── .pt_tmp
+├── .myp
+├── myapp/
+
+   ├── __pycache__/
+       ├── __init__.cpython-311.pyc
+       ├── admin.cpython-311.pyc
+       ├── apps.cpython-311.pyc
+       ├── models.cpython-311.pyc
+       ├── urls.cpython-311.pyc
+       ├── views.cpython-311.pyc
+   ├── migrations/
+       ├── __pycache__/
+           ├── __init__.cpython-311.pyc
+           ├── 0001_initial.cpython-311.pyc
+│   │   ├── __init__.py
+│   │   └── 0001_initial.py
+│   ├── static/
+│   │   ├── styles.css
+│   ├── init_.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+│   └── static/
+│       ├── images/
+│       ├── images2/
+│       ├── images3/
+│       ├── co2_footprint.css
+│       ├── compare_airlines.css
+│       ├── delay_analysis.css
+│       ├── delay_predictor.css
+│       ├── live_tracking.css
+│       ├── statistics.css
+│       ├── style.css
+│       └── styles.css
+    └── templates/
+│       ├── about.html
+│       ├── co2_footprint.html
+│       ├── compare_airlines.html
+│       ├── delay_analysis.html
+│       ├── delay_predictor.html
+│       ├── home.html
+│       ├── live_tracking.html
+│       ├── statistics.html
+
+├── webapp/
+│   ├── __pycache__/
+        ├── __init__.cpython-311.pyc
+        ├── settings.cpython-311.pyc
+        ├── urls.cpython-311.pyc
+        ├── wsgi.cpython-311.pyc
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── .gitattributes
+├── db.sqlite3
+├── manage.py
+└── README.md
+```
+
 
 ## **🚀 Installation & Setup**
 
