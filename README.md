@@ -87,7 +87,7 @@ webapp/
 ## **🚀 Installation & Setup**
 ### **1️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/Param1304/Smart-Flight-Assistant.git
+git clone https://github.com/your-username/Smart-Flight-Assistant.git
 cd task_optimizer
 ```
 
@@ -117,9 +117,52 @@ Open **http://127.0.0.1:8000/** in your browser.
 
 ## **🖥️ Usage**
 
+### ** Flight Delay Predictions**  
+1️⃣ Navigate to ``  
+2️⃣  
+3️⃣  
+4️⃣  
+
+### ** Airlines Performance Comparison**  
+1️⃣ Navigate to ``  
+2️⃣ **Bar Chart**
+3️⃣ 
+4️⃣ 
+
+### ** Estimate CO2 emissions**  
+1️⃣ Navigate to ``  
+2️⃣  
+3️⃣  
+
+
 ## **📌 Key Technologies Used**
+✅ **Backend:** Django (Python)  
+✅ **Frontend:** HTML, CSS, JavaScript  
+✅ **Machine Learning:** FT Transformer, Pytorch Tabular 
+✅ **Data Visualization:** Plotly.js  
+✅ **Database:** SQLite  
+
 
 ## **🛠️ Useful Git Commands**
+### **Initialize a New Repository**  
+```sh
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/your-username/Smart-Flight-Assistant.git
+git push -u origin main
+```
+
+### **Common Git Commands**  
+```sh
+git status               # Check changes
+git add .                # Stage all changes
+git commit -m "Message"  # Commit changes
+git pull origin main     # Pull latest changes
+git push origin main     # Push changes
+```
+---
 
 ## **🚀 Future Enhancements**  
 
