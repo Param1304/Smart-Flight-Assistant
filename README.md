@@ -87,7 +87,7 @@ webapp/
 ## **🚀 Installation & Setup**
 ### **1️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/your-username/task_optimizer.git
+git clone https://github.com/Param1304/Smart-Flight-Assistant.git
 cd task_optimizer
 ```
 
